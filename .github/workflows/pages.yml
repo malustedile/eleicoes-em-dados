@@ -1,4 +1,4 @@
-# Publica a pasta site/ no GitHub Pages a cada push na branch main.
+# Publica a pasta site/ no GitHub Pages a cada push na branch main (alterações em site/ ou neste arquivo).
 # Antes de usar: Settings > Pages > Build and deployment > Source = "GitHub Actions".
 name: Publicar site
 on:
