@@ -1,0 +1,17 @@
+# ambientes e dados brutos (muito grandes; reproduzíveis pelos scripts)
+.venv/
+data/raw/
+data/parquet/
+*.zip
+*.zip:Zone.Identifier
+# saídas intermediárias
+out/
+__pycache__/
+# o que vai para o ar está em site/ (gerado por scripts/build_site.py)
+
+# dashboard/: só o modelo vai para o repositório (o resto é gerado)
+dashboard/*
+!dashboard/template.html
+
+# PDF de referência do TSE (não faz parte do projeto)
+Informa*.pdf
