@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 DASH, SITE = ROOT / "dashboard", ROOT / "site"
-ARQUIVOS = ["index.html", "geo_uf.js", "geo_mun.js", "dados_mun.js"]
+ARQUIVOS = ["index.html", "geo_uf.js", "geo_mun.js", "dados_mun.js", "dados_local.js"]
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--url", help="URL pública do site (sem barra final), para as tags og:image/og:url, ex.: https://usuario.github.io/eleicoes")
@@ -31,7 +31,7 @@ with sync_playwright() as p:
     pg.goto((SITE / "index.html").as_uri())
     pg.wait_for_timeout(1000)
     pg.add_style_tag(content="""
-      .top, footer, main > section:not(#mapa), #mapa h2, #mapa .sub, #mapa .card.s4, .mapbar, .glg, #mapa .ins {display:none!important}
+      .top, footer, main > section:not(#mapa), .scope, #mapa h2, #mapa .sub, #mapa .card.s4, .mapbar, .glg, .ficha, #mapa .ins {display:none!important}
       body{padding:0} main{padding:0;max-width:none}
       #mapa .grid{display:block}
       #mapa .card.s8{position:fixed;inset:0;border:0;border-radius:0;padding:0;display:flex;align-items:center;gap:30px;background:var(--bg)}
@@ -43,6 +43,7 @@ with sync_playwright() as p:
       const c = document.querySelector('#mapa .card.s8'), t = document.createElement('div'); t.id = 'og-t';
       t.innerHTML = '<div style="font:700 56px/1.05 system-ui,sans-serif;letter-spacing:-.02em;color:#0b0b0b">Eleições 2026<br>em dados</div><div style="font:400 24px/1.35 system-ui,sans-serif;color:#52514e;margin-top:18px">2º turno: a prorrogação até as 19h, os votos nulos e o perfil das terceiras vias</div><div style="font:400 17px system-ui,sans-serif;color:#7a7974;margin-top:26px">Dados abertos do TSE</div>';
       c.insertBefore(t, c.firstChild);
+      const f = document.createElement('div'); f.style.cssText = 'position:fixed;left:0;right:0;top:0;height:14px;background:var(--stripe);z-index:9'; document.body.appendChild(f);
     }""")
     pg.wait_for_timeout(300)
     pg.screenshot(path=str(SITE / "og.png"))

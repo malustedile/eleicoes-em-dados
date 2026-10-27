@@ -256,6 +256,53 @@ if t2i.exists() and zt1.exists() and (PQ / "perfil_comp_abst_2026.parquet").exis
             pass
 (OUT / "dados_mun.js").write_text("const DADOS_MUN=" + json.dumps(mm, separators=(",", ":")) + ";\n")
 
+# detalhe por município (código IBGE; "ZZ" = exterior), para o recorte da página inteira:
+# a = 1º turno [válidos, lula, flávio, cury, renan, caiado, zema, outros]; p = perfil [aptos, compareceram, idade média, 16–24, 60+]
+# b = 2º turno [lula, flávio, brancos, nulos, compareceram, seções, prorrogadas]; d = dígitos mais digitados nos nulos
+loc = {}
+if t2i.exists() and zt1.exists() and (PQ / "perfil_comp_abst_2026.parquet").exists():
+    idade_vias._garante_g(c)
+    t2i_map = json.loads(t2i.read_text())
+    def chave(uf, mun):
+        return "ZZ" if uf == "ZZ" else t2i_map.get(str(mun).zfill(5))
+    for uf, mun, *v in c.execute("select uf, mun, sum(validos), sum(lula), sum(flavio), sum(cury), sum(renan), sum(caiado), sum(zema), sum(outros) from z1 group by 1,2").fetchall():
+        k = chave(uf, mun)
+        if k: loc.setdefault(k, {})["a"] = [int(x or 0) for x in v]
+    for uf, mun, ap in c.execute(f"select uf, lpad(mun,5,'0'), sum(aptos) from '{zt1}' group by 1,2").fetchall():
+        k = chave(uf, mun)
+        if k: loc.setdefault(k, {}).setdefault("p", [0] * 5)[0] += int(ap or 0)
+    for uf, mun, comp, idade, j, a60 in c.execute("select uf, mun, sum(comp), sum(idade_media*comp)/nullif(sum(comp),0), sum(j1624), sum(a60) from idade_z group by 1,2").fetchall():
+        k = chave(uf, mun)
+        if k:
+            pp = loc.setdefault(k, {}).setdefault("p", [0] * 5)
+            pp[1:] = [int(comp or 0), round(idade or 0, 2), int(j or 0), int(a60 or 0)]
+    if bu_files and ufs_ok:
+        inc2 = ",".join(repr(u) for u in ufs_ok)
+        b = {}
+        for uf, mun, l2, f2, br, nu, comp, n in c.execute(f"""select uf, lpad(cd_municipio,5,'0'),
+            sum(coalesce(try_cast(regexp_extract(pres_nominais,'(?:^|;)13:(\\d+)',1) as int),0)),
+            sum(coalesce(try_cast(regexp_extract(pres_nominais,'(?:^|;)22:(\\d+)',1) as int),0)),
+            sum(pres_branco), sum(pres_nulo), sum(comparecimento), count(*) from bu where uf in ({inc2}) group by 1,2""").fetchall():
+            k = chave(uf, mun)
+            if k:
+                acc = b.setdefault(k, [0] * 7)
+                for i2, x in enumerate((l2, f2, br, nu, comp, n)): acc[i2] += int(x or 0)
+        for uf, mun, pr in c.execute(f"select uf, lpad(cd_municipio,5,'0'), sum(case when atraso >= 105 then 1 else 0 end) from bu3 where uf in ({inc2}) group by 1,2").fetchall():
+            k = chave(uf, mun)
+            if k and k in b: b[k][6] += int(pr or 0)
+        for k, v in b.items(): loc.setdefault(k, {})["b"] = v
+        if "rdv" in [r[0] for r in c.execute("show tables").fetchall()]:
+            dd = {}
+            for uf, mun, dg, q in c.execute("""select uf, lpad(cd_municipio,5,'0'), digitos, q from (select uf, cd_municipio, digitos, sum(qtd) q,
+                row_number() over (partition by uf, cd_municipio order by sum(qtd) desc) rn from rdv where cargo=1 and tipo=4 and uf <> 'ZZ' group by 1,2,3) where rn <= 4""").fetchall():
+                k = chave(uf, mun)
+                if k: dd.setdefault(k, []).append([dg or "(vazio)", int(q)])
+            zz = c.execute("select digitos, sum(qtd) q from rdv where cargo=1 and tipo=4 and uf = 'ZZ' group by 1 order by q desc limit 4").fetchall()
+            if zz: dd["ZZ"] = [[dg or "(vazio)", int(q)] for dg, q in zz]
+            for k, v in dd.items():
+                if k in loc: loc[k]["d"] = v
+(OUT / "dados_local.js").write_text("const DADOS_LOCAL=" + json.dumps(loc, separators=(",", ":"), ensure_ascii=False) + ";\n")
+
 (OUT / "dados.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
 tpl = (OUT / "template.html").read_text()
 (OUT / "index.html").write_text(tpl.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False)))

@@ -211,18 +211,130 @@ footer{border-top:1px solid var(--line);padding-top:18px;max-width:90ch}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 @media print{.top,#tema{display:none}.card{break-inside:avoid}}
+
+/* ---- cores do carrossel: verde, amarelo, azul e vermelho ---- */
+:root{--g:#0a8f45;--gd:#087a3b;--y:#f5c400;--b:#1f4fd0;--r:#d83a3a;--navy:#0d2a78;--s1:#1f4fd0;--op:#0a8f45;--acc:var(--g);--stripe:linear-gradient(90deg,#0a8f45 0 25%,#f5c400 25% 50%,#1f4fd0 50% 75%,#d83a3a 75%)}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])){--g:#2fbf71;--gd:#0b3a20;--b:#7b9bff;--r:#f06a6a;--navy:#0f1d4d;--s1:#6f8cff;--op:#2fbf71}}
+:root[data-theme="dark"]{--g:#2fbf71;--gd:#0b3a20;--b:#7b9bff;--r:#f06a6a;--navy:#0f1d4d;--s1:#6f8cff;--op:#2fbf71}
+.top{position:sticky;padding-top:15px}
+.top::before,footer::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--stripe)}
+nav a{--a:var(--g);border:1px solid transparent;display:inline-flex;align-items:center;gap:7px}
+nav a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--a)}
+nav a:hover{border-color:var(--a)}
+nav a[href="#prorrogacao"]{--a:var(--r)}nav a[href="#nulos"]{--a:var(--b)}nav a[href="#vias"]{--a:var(--y)}nav a[href="#metodo"]{--a:var(--navy)}
+nav a[aria-current="true"]{background:var(--a);color:#fff;box-shadow:none;border-color:var(--a)}
+nav a[aria-current="true"]::before{background:currentColor}
+nav a[href="#vias"][aria-current="true"]{color:#14201f}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) nav a[href="#metodo"]{--a:#4a6bd6}}
+:root[data-theme="dark"] nav a[href="#metodo"]{--a:#4a6bd6}
+#mapa,#juventude{--acc:var(--g);--op:var(--g)}
+#prorrogacao{--acc:var(--r);--op:var(--r)}
+#nulos{--acc:var(--b);--op:var(--b)}
+#vias{--acc:var(--y)}
+#metodo{--acc:var(--y)}
+main > section:not(#coleta) h2::before{content:"";display:block;width:56px;height:6px;border-radius:3px;background:var(--acc);margin-bottom:14px}
+.card:not(.kpi){border-top:3px solid var(--acc,var(--line))}
+.card.kpi{border-top:4px solid var(--acc,var(--ink))}
+#kpi-votos b,#kpi-nulo b{color:var(--acc)}
+#kpi-vias .kpi:nth-child(1){border-top-color:var(--s3)}#kpi-vias .kpi:nth-child(2){border-top-color:var(--c5)}#kpi-vias .kpi:nth-child(3){border-top-color:var(--s4)}#kpi-vias .kpi:nth-child(4){border-top-color:var(--c6)}
+.lk{color:var(--s1)}
+/* hero verde, como a capa do carrossel */
+#coleta{background:var(--gd);color:#fff;border-radius:20px;padding:36px clamp(20px,4vw,48px) 26px;margin-top:8px}
+#coleta h1{color:#fff}
+#coleta{position:relative;overflow:hidden}
+#coleta > *{position:relative;z-index:1}
+#coleta::after{content:"26";position:absolute;right:-10px;top:-30px;font-family:var(--serif);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:.8;letter-spacing:-.05em;color:#fff;opacity:.08;pointer-events:none}
+.chip-q{display:inline-block;background:#064d27;color:var(--y);font-family:var(--serif);font-size:clamp(20px,2.6vw,28px);line-height:1.15;padding:8px 18px 10px;border-radius:12px;margin:0 0 20px}
+#coleta .lead{color:#e6f6ec}
+#coleta .card.kpi{border-top:5px solid var(--kc,#fff)}
+#kpis .kpi:nth-child(2){--kc:var(--y)}#kpis .kpi:nth-child(3){--kc:#8fa8ff}#kpis .kpi:nth-child(4){--kc:#ff8080}
+#coleta .kpi b,#coleta .kpi span{color:#fff}#coleta .kpi em{color:#cfe9d8}
+#coleta .lk{color:var(--y)}
+#coleta details.andam > summary{color:#e6f6ec}
+/* metodologia: painel azul-marinho, como o último slide */
+main > section#metodo{background:var(--navy);color:#cfd9ff;border-radius:20px;padding:4px clamp(20px,4vw,48px) 36px;margin-top:72px}
+main > section#metodo h2{color:#f3f2ee;margin-top:36px}
+#metodo .card{background:rgba(255,255,255,.06);border:1px solid #2a4aa6;border-top:3px solid var(--y);color:#cfd9ff}
+#metodo .card h3{color:#fff}#metodo ul,#metodo li{color:#cfd9ff}
+footer{position:relative;border-top:0;padding-top:24px;max-width:none}
+/* mapa: medidas, filtros, detalhe */
+.chips{gap:8px 22px;margin-bottom:12px}
+.chipg{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.chipl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 12px 5px 10px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .15s,border-color .15s,color .15s}
+.chip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--chip)}
+.chip:hover{border-color:var(--chip)}
+.chip[aria-pressed=true]{background:var(--chip);border-color:var(--chip);color:var(--chipfg)}
+.chip[aria-pressed=true]::before{background:var(--chipfg)}
+.mapfilt{gap:10px 16px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;align-items:flex-end}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fl select,.fl input:not([type=checkbox]){font:inherit;font-size:13.5px;text-transform:none;letter-spacing:0;font-weight:400;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface2);color:var(--ink);min-width:140px}
+.fl-b{flex:1;min-width:170px}.fl-b input{width:100%}
+.fl-c{flex-direction:row;align-items:center;gap:6px;text-transform:none;letter-spacing:0;font-weight:400;font-size:12.5px;color:var(--ink2);padding-bottom:7px;cursor:pointer}
+.mapfilt .seg{margin:0}
+.mapfilt .seg button[aria-pressed=true]{background:var(--op);color:#fff}
+.mapfilt button.tg{margin-left:auto}
+#seg-rank{margin:6px 0 10px}#seg-rank button[aria-pressed=true]{background:var(--op);color:#fff}
+#c-mapa svg{max-height:640px;overflow:hidden}
+#c-mapa svg path{vector-effect:non-scaling-stroke}
+#c-mapa path[data-k],#c-mapa svg g{cursor:pointer}
+#c-mapa path[data-k]:not(.off):hover{stroke:var(--ink)!important;stroke-width:1.6px!important}
+#c-mapa path.off{opacity:.1;pointer-events:none}
+#c-mapa g.off{opacity:.2;pointer-events:none}
+#c-mapa path.sel{stroke:var(--ink)!important;stroke-width:2.2px!important}
+#c-mapa path.selUF{fill:none;stroke:var(--ink);stroke-width:1.6px;pointer-events:none}
+#c-rank g[data-click]{cursor:pointer}
+#mapa .card.s4{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--op);border-radius:12px;padding:16px;align-self:start}
+.ficha{margin-top:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--op);border-radius:12px;position:relative}
+.ficha .fh{font-weight:600;font-size:15px;padding-right:28px}
+.ficha .fv{font-family:var(--serif);font-size:40px;line-height:1.1;letter-spacing:-.02em;margin:4px 0 6px;color:var(--op)}
+.ficha ul{margin:0 0 10px;padding-left:18px;font-size:13px;color:var(--ink2)}
+.ficha .x{position:absolute;top:6px;right:10px;border:0;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer}
+.mapnote{font-size:12.5px}
+@media (max-width:700px){.fl{flex:1 1 130px}.fl select,.fl input:not([type=checkbox]){min-width:0;width:100%}.mapfilt button.tg{margin-left:0}#coleta{border-radius:16px}}
+
+/* recorte global */
+.top .in{gap:8px 12px}nav{flex-wrap:nowrap;gap:0}nav a{padding:5px 9px;white-space:nowrap}.brand span{display:none}@media (min-width:1180px){.brand span{display:inline}}
+html{scroll-padding-top:128px}
+.scope{position:sticky;top:57px;z-index:19;margin:0 -16px;padding:8px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.scope .in{max-width:1120px;margin:0 auto;display:flex;align-items:flex-end;gap:10px 14px;flex-wrap:wrap}
+.sc-t{font-family:var(--serif);font-size:18px;font-weight:600;padding-bottom:5px;color:var(--ink)}
+.scope .fl select{min-width:130px}.scope .fl-b{min-width:190px;max-width:300px}
+.sc-now{font-size:13px;color:var(--ink2);flex:1;min-width:160px;padding-bottom:7px}.sc-now b{color:var(--ink);font-size:14px}
+.scope .tg{margin-bottom:2px}
+.aviso{font-size:12.5px;background:var(--warnbg);color:var(--warn);padding:8px 12px;border-radius:8px;max-width:78ch;margin:0 0 16px}
+#local{--acc:var(--b);--op:var(--b)}
+nav a[href="#local"]{--a:var(--b)}
+.duel{display:flex;height:60px;border-radius:12px;overflow:hidden;gap:3px;margin:8px 0}
+.duel > div{display:flex;align-items:center;gap:8px;padding:0 14px;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;min-width:0}
+.duel .n{font-family:var(--serif);font-size:28px;font-weight:500;letter-spacing:-.02em}
+#c-lt tr[data-uf],#c-lt tr[data-mun]{cursor:pointer}
+#c-lt td.nm{white-space:nowrap}
+#c-ln{margin-top:18px}
+#c-ln h4{margin:0 0 6px;font-size:13.5px}
+@media (max-width:700px){.scope{position:static;margin:0 -14px;padding:8px 14px}.scope .fl{flex:1 1 130px}.scope .fl-b{max-width:none;flex-basis:100%}.sc-t{width:100%;padding-bottom:0}}
 </style>
 </head>
 <body>
 <header class="top"><div class="in">
   <a class="brand" href="#coleta">Eleições 2026<span>2º turno · 25/10</span></a>
-  <nav><a href="#mapa">Mapa</a><a href="#prorrogacao">Prorrogação</a><a href="#nulos">Nulos</a><a href="#vias">Terceiras vias</a><a href="#juventude">Juventude</a><a href="#metodo">Metodologia</a></nav>
+  <nav><a href="#local">Quem votou</a><a href="#mapa">Mapa</a><a href="#prorrogacao">Prorrogação</a><a href="#nulos">Nulos</a><a href="#vias">Terceiras vias</a><a href="#juventude">Juventude</a><a href="#metodo">Metodologia</a></nav>
   <div class="right"><span class="pill" id="pill"><i></i><span id="pilltxt"></span></span><button class="tg" id="tema" type="button" title="Alternar tema"></button></div>
 </div></header>
+<div class="scope" id="scope"><div class="in">
+  <span class="sc-t">Ver dados de</span>
+  <label class="fl">Região<select id="sel-reg"></select></label>
+  <label class="fl">Estado<select id="sel-uf"></select></label>
+  <label class="fl fl-b">Município<input id="in-mun" list="dl-mun" placeholder="Buscar município…" autocomplete="off"></label>
+  <datalist id="dl-mun"></datalist>
+  <div class="sc-now" id="sc-now"></div>
+  <button type="button" class="tg" id="btn-reset" hidden>Voltar ao Brasil</button>
+</div></div>
 <main>
 
 <section id="coleta">
   <h1>Eleições 2026 em dados</h1>
+  <div class="chip-q">2º turno de 2026, seção por seção</div>
   <p class="lead">A prorrogação da votação até as 19h, o que os eleitores digitaram para anular o voto e o perfil das zonas onde cada terceira via foi votada. Dados abertos do TSE, seção por seção.</p>
   <h2 class="sr">Resumo</h2>
   <div class="grid" id="kpis"></div>
@@ -237,12 +349,29 @@ footer{border-top:1px solid var(--line);padding-top:18px;max-width:90ch}
   </details>
 </section>
 
+<section id="local">
+  <h2 id="h-local">Quem votou em quem</h2>
+  <p class="sub" id="sub-local"></p>
+  <div class="grid" id="kpi-local"></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="card s6"><h3>1º turno: votos válidos para presidente</h3><p class="ins" id="i-l1"></p><div id="c-l1"></div></div>
+    <div class="card s6"><h3>2º turno: Lula × Flávio</h3><p class="ins" id="i-l2"></p><div id="c-l2"></div><div id="c-ln"></div></div>
+    <div class="card s12" id="card-lt"><h3 id="t-lt"></h3><p class="d">Clique numa linha para ver só aquele local. Ordenado pelo número de votos válidos do 1º turno.</p><div id="c-lt"></div></div>
+  </div>
+</section>
+
 <section id="mapa">
   <h2>Mapas</h2>
-  <p class="sub">Escolha a medida e a visão (municípios, estados ou quadrados, que ajudam a ver os estados pequenos). Nas medidas do 2º turno, o que está em cinza ainda aguarda a coleta.</p>
+  <p class="sub">Escolha a medida e destaque os extremos; o recorte (região, estado ou município) vem da barra no topo. Clique num estado ou município para ver o detalhe. Nas medidas do 2º turno, o que está em cinza ainda aguarda a coleta.</p>
+  <div class="mapbar chips" id="chips-mapa" role="group" aria-label="Medida do mapa"></div>
+  <div class="mapbar mapfilt">
+    <div class="fl"><span>Visão</span><div class="seg" id="seg-vista"></div></div>
+    <div class="fl"><span>Destacar</span><div class="seg" id="seg-dest"></div></div>
+    <label class="fl fl-c"><input type="checkbox" id="ck-esc"> Escala do Brasil</label>
+  </div>
   <div class="grid">
-    <div class="card s8"><div class="mapbar"><select id="sel-mapa" aria-label="Medida do mapa"></select><div class="seg" id="seg-vista"></div><span class="mapnote" id="n-mapa"></span></div><p class="ins" id="i-mapa"></p><div id="c-mapa"></div><div class="glg" id="lg-mapa"></div></div>
-    <div class="card s4"><h3 id="t-rank">Ranking das UFs</h3><p class="d" id="d-rank"></p><div id="c-rank"></div></div>
+    <div class="card s8"><div class="mapbar"><span class="mapnote" id="n-mapa"></span></div><p class="ins" id="i-mapa"></p><div id="c-mapa"></div><div class="glg" id="lg-mapa"></div><div class="ficha" id="f-mapa" hidden></div></div>
+    <div class="card s4"><h3 id="t-rank">Ranking das UFs</h3><div class="seg" id="seg-rank" hidden></div><p class="d" id="d-rank"></p><div id="c-rank"></div></div>
   </div>
 </section>
 
@@ -324,6 +453,7 @@ footer{border-top:1px solid var(--line);padding-top:18px;max-width:90ch}
 <script src="geo_uf.js"></script>
 <script src="geo_mun.js"></script>
 <script src="dados_mun.js"></script>
+<script src="dados_local.js"></script>
 <script>
 const D = /*__DATA__*/null;
 const fmt = n => n == null ? "–" : Math.round(n).toLocaleString("pt-BR");
@@ -344,8 +474,8 @@ const empty = (host, msg) => { host.innerHTML = `<p class="pending">${msg}</p>`;
 const kpi = (cls, b, s, e) => `<div class="card kpi ${cls}"><b>${b}</b><span>${s}</span>${e ? `<em>${e}</em>` : ""}</div>`;
 
 /* barras horizontais: items = [{label, value, tip, color}] */
-function hbars(host, items, {color = "var(--op)", fmtv = fmt, h = 26} = {}){
-  const W = wid(host), R = 64, H = items.length * h + 8;
+function hbars(host, items, {color = "var(--op)", fmtv = fmt, h = 26, R = 64} = {}){
+  const W = wid(host), H = items.length * h + 8;
   const L = Math.min(W * .46, Math.max(60, Math.max(...items.map(i => i.label.length)) * 6.6 + 12));
   const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, role: "img"});
   const max = Math.max(...items.map(i => i.value), 1e-9);
@@ -354,10 +484,11 @@ function hbars(host, items, {color = "var(--op)", fmtv = fmt, h = 26} = {}){
     el("text", {x: L - 8, y: y + h / 2 + 1, "text-anchor": "end", "dominant-baseline": "middle"}, svg, it.label);
     const g = el("g", {}, svg);
     el("rect", {x: L, y: y + 3, width: w, height: h - 8, rx: 4, fill: it.color || color}, g);
-    el("text", {x: L + w + 6, y: y + h / 2 + 1, class: "val", "dominant-baseline": "middle"}, g, fmtv(it.value));
+    el("text", {x: L + w + 6, y: y + h / 2 + 1, class: "val", "dominant-baseline": "middle"}, g, it.txt != null ? it.txt : fmtv(it.value));
     el("rect", {x: 0, y, width: W, height: h, fill: "transparent"}, g);
     g.addEventListener("mousemove", e => showTip(e, it.tip || `${it.label}: ${fmtv(it.value)}`));
     g.addEventListener("mouseleave", hideTip);
+    if (it.click){ g.setAttribute("data-click", 1); g.addEventListener("click", it.click); }
   });
   host.replaceChildren(svg);
 }
@@ -423,6 +554,7 @@ function divbars(host, items, {fmtv = v => v.toFixed(1), esq = "", dir = "", cp 
     el("rect", {x: 0, y, width: W, height: h, fill: "transparent"}, g);
     g.addEventListener("mousemove", e => showTip(e, it.tip || `${it.label}: ${fmtv(it.value)}`));
     g.addEventListener("mouseleave", hideTip);
+    if (it.click){ g.setAttribute("data-click", 1); g.addEventListener("click", it.click); }
   });
   el("line", {x1: mid, x2: mid, y1: T - 2, y2: H - 4, stroke: css("--muted"), "stroke-width": 1}, svg);
   host.replaceChildren(svg);
@@ -438,30 +570,32 @@ function corTile(v, kind, lo, hi, mid, cor = "var(--op)"){
   const pc = Math.round(14 + a * 80);
   return {bg: `color-mix(in srgb, ${base} ${pc}%, var(--surface))`, fg: pc > 52 ? "#fff" : "var(--ink)"};
 }
-function choropleth(host, geo, paths, vals, {kind = "seq", mid = 50, fmtv = v => v.toFixed(1), nome = "", nomes = null, rotulos = null, borda = 1, quantil = false, contorno = null, cor = "var(--op)"} = {}){
-  const xs = Object.values(vals).filter(v => v != null).sort((a, b) => a - b);
+function choropleth(host, geo, paths, vals, {kind = "seq", mid = 50, fmtv = v => v.toFixed(1), nome = "", nomes = null, rotulos = null, borda = 1, quantil = false, contorno = null, cor = "var(--op)", escala = null, tip = null} = {}){
+  const xs = Object.values(escala || vals).filter(v => v != null).sort((a, b) => a - b);
   const q = p => xs[Math.min(xs.length - 1, Math.max(0, Math.round(p * (xs.length - 1))))];
   const lo = xs.length ? (quantil ? q(.05) : xs[0]) : 0, hi = xs.length ? (quantil ? q(.95) : xs[xs.length - 1]) : 1;
   const svg = el("svg", {viewBox: `0 0 ${geo.w} ${geo.h}`, role: "img", "aria-label": nome, style: "max-width:660px;margin:0 auto"});
   Object.entries(paths).forEach(([k, d]) => { const c = corTile(vals[k] == null ? null : vals[k], kind, lo, hi, mid, cor); el("path", {d, "data-k": k, style: `fill:${c.bg};stroke:var(--surface);stroke-width:${borda};stroke-linejoin:round`}, svg); });
   if (contorno) Object.values(contorno).forEach(d => el("path", {d, style: "fill:none;stroke:var(--ink2);stroke-width:.7;opacity:.6;pointer-events:none;stroke-linejoin:round"}, svg));
   if (rotulos) Object.entries(rotulos).forEach(([k, [x, y]]) => { const c = corTile(vals[k], kind, lo, hi, mid, cor); el("text", {x, y: y + 4, "text-anchor": "middle", style: `fill:${c.fg};font-weight:700;font-size:11px;pointer-events:none`}, svg, k); });
-  svg.addEventListener("mousemove", e => { const k = e.target.getAttribute && e.target.getAttribute("data-k"); if (!k) return hideTip(); const v = vals[k]; const nm = nomes ? (nomes[k] ? `${nomes[k][0]} (${nomes[k][1]})` : k) : k; showTip(e, `<b>${nm}</b><br>${nome}: ${v == null ? "sem dado ainda" : fmtv(v)}`); });
+  svg.addEventListener("mousemove", e => { const k = e.target.getAttribute && e.target.getAttribute("data-k"); if (!k) return hideTip(); const v = vals[k]; if (tip) return showTip(e, tip(k, v)); const nm = nomes ? (nomes[k] ? `${nomes[k][0]} (${nomes[k][1]})` : k) : k; showTip(e, `<b>${nm}</b><br>${nome}: ${v == null ? "sem dado ainda" : fmtv(v)}`); });
   svg.addEventListener("mouseleave", hideTip);
   host.replaceChildren(svg);
   return {lo, hi};
 }
-function tilemap(host, vals, {kind = "seq", mid = 50, fmtv = v => v.toFixed(1), nome = "", cor = "var(--op)"} = {}){
+function tilemap(host, vals, {kind = "seq", mid = 50, fmtv = v => v.toFixed(1), nome = "", cor = "var(--op)", escala = null, tip = null, ativo = null, onsel = null} = {}){
   const W = wid(host), gap = 5, cell = Math.max(34, Math.min(68, Math.floor((W - gap * 7) / 8))), H = 7 * (cell + gap);
-  const xs = Object.values(vals).filter(v => v != null), lo = Math.min(...xs), hi = Math.max(...xs);
+  const xs = Object.values(escala || vals).filter(v => v != null), lo = Math.min(...xs), hi = Math.max(...xs);
   const svg = el("svg", {viewBox: `0 0 ${8 * (cell + gap)} ${H}`, role: "img", style: `max-width:${8 * (cell + gap)}px;margin:0 auto`});
   Object.entries(TILES).forEach(([uf, [cx, cy]]) => {
     const v = vals[uf], c = corTile(v, kind, lo, hi, mid, cor), g = el("g", {}, svg), x = cx * (cell + gap), y = cy * (cell + gap);
     el("rect", {x, y, width: cell, height: cell, rx: 6, fill: c.bg}, g);
     el("text", {x: x + cell / 2, y: y + cell / 2 - (v != null && cell >= 44 ? 3 : -4), "text-anchor": "middle", style: `fill:${c.fg};font-weight:700;font-size:${cell >= 44 ? 13 : 11}px`}, g, uf === "ZZ" ? "Ext." : uf);
     if (v != null && cell >= 44) el("text", {x: x + cell / 2, y: y + cell / 2 + 13, "text-anchor": "middle", style: `fill:${c.fg};font-size:11px`}, g, fmtv(v));
-    g.addEventListener("mousemove", e => showTip(e, `<b>${uf === "ZZ" ? "Exterior" : uf}</b><br>${nome}: ${v == null ? "sem dado ainda" : fmtv(v)}`));
+    g.addEventListener("mousemove", e => showTip(e, tip ? tip(uf, v) : `<b>${uf === "ZZ" ? "Exterior" : uf}</b><br>${nome}: ${v == null ? "sem dado ainda" : fmtv(v)}`));
     g.addEventListener("mouseleave", hideTip);
+    if (ativo && !ativo(uf)) g.classList.add("off");
+    if (onsel && uf !== "ZZ") g.addEventListener("click", () => onsel(uf));
   });
   host.replaceChildren(svg);
   return {lo, hi};
@@ -496,6 +630,256 @@ $("tema").onclick = () => { tema = TEMAS[(TEMAS.indexOf(tema) + 1) % 3]; try { l
 aplicaTema();
 
 let modoPerfil = "eleitorado", mapaSel = null, mapaVista = "mun", modoPror = "faixa";
+/* ---- mapa: filtros, zoom e detalhe ---- */
+const REG = {Norte: ["AC", "AM", "AP", "PA", "RO", "RR", "TO"], Nordeste: ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"], "Centro-Oeste": ["DF", "GO", "MS", "MT"], Sudeste: ["ES", "MG", "RJ", "SP"], Sul: ["PR", "RS", "SC"]};
+const UF_NOME = {AC: "Acre", AL: "Alagoas", AM: "Amazonas", AP: "Amapá", BA: "Bahia", CE: "Ceará", DF: "Distrito Federal", ES: "Espírito Santo", GO: "Goiás", MA: "Maranhão", MG: "Minas Gerais", MS: "Mato Grosso do Sul", MT: "Mato Grosso", PA: "Pará", PB: "Paraíba", PE: "Pernambuco", PI: "Piauí", PR: "Paraná", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte", RO: "Rondônia", RR: "Roraima", RS: "Rio Grande do Sul", SC: "Santa Catarina", SE: "Sergipe", SP: "São Paulo", TO: "Tocantins"};
+const UFS = Object.keys(UF_NOME);
+let mapaReg = "", mapaUF = "", mapaDest = "todos", mapaEscBR = false, mapaMun = null, mapaRank = "max", mapaTocado = false;
+try { const q = new URLSearchParams(location.search);
+  if (q.get("mapa")) mapaSel = q.get("mapa");
+  if (q.get("mun")) mapaMun = q.get("mun");
+  if (["mun", "uf", "tile"].includes(q.get("vista"))) mapaVista = q.get("vista");
+  if (REG[q.get("reg")]) mapaReg = q.get("reg");
+  if (UFS.includes(q.get("uf"))) mapaUF = q.get("uf");
+  if (["top", "bot"].includes(q.get("dest"))) mapaDest = q.get("dest");
+  if (q.get("esc") === "br") mapaEscBR = true; } catch (e) {}
+
+function setMapa(p){
+  if ("m" in p) mapaSel = p.m;
+  if ("vista" in p) mapaVista = p.vista;
+  if ("reg" in p){ mapaReg = p.reg; mapaUF = ""; mapaMun = null; }
+  if ("uf" in p){ mapaUF = p.uf; if (p.uf) mapaReg = ""; if (!("mun" in p)) mapaMun = null; }
+  if ("dest" in p) mapaDest = p.dest;
+  if ("esc" in p) mapaEscBR = p.esc;
+  if ("mun" in p) mapaMun = p.mun;
+  if ("rank" in p) mapaRank = p.rank;
+  if ("reset" in p){ mapaReg = ""; mapaUF = ""; mapaDest = "todos"; mapaMun = null; $("in-mun").value = ""; }
+  mapaTocado = true;
+  renderEscopo(); renderLocal(); renderMapa();
+}
+/* enquadra o SVG nos estados escolhidos */
+function zoomUF(svg, ufs){
+  const g = el("g", {style: "visibility:hidden"}, svg); let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  ufs.forEach(u => { if (!GEO_UF.p[u]) return; const b = el("path", {d: GEO_UF.p[u]}, g).getBBox(); x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.width); y1 = Math.max(y1, b.y + b.height); });
+  g.remove(); if (x1 < x0) return;
+  const pad = Math.max(x1 - x0, y1 - y0) * .06;
+  svg.setAttribute("viewBox", `${x0 - pad} ${y0 - pad} ${x1 - x0 + 2 * pad} ${y1 - y0 + 2 * pad}`);
+}
+/* ---- recorte da página: Brasil, região, estado ou município ---- */
+const LOC = typeof DADOS_LOCAL !== "undefined" ? DADOS_LOCAL : {};
+const sgn = (v, d = 1) => Math.abs(v) < 0.5 * Math.pow(10, -d) ? dec1(0, d) : (v >= 0 ? "+" : "−") + dec1(Math.abs(v), d);
+const ufLoc = k => k === "ZZ" ? "ZZ" : ((typeof GEO_MUN !== "undefined" && GEO_MUN.n[k]) || [])[1];
+const nomeLoc = k => k === "ZZ" ? "Exterior" : ((typeof GEO_MUN !== "undefined" && GEO_MUN.n[k]) || [k])[0];
+const nomeUF = u => u === "ZZ" ? "Exterior" : `${u} · ${UF_NOME[u]}`;
+let brAgg = null, munIdx = null;
+function escopo(){
+  const ks = Object.keys(LOC);
+  if (mapaMun && LOC[mapaMun]) return {nivel: "mun", keys: [mapaMun], nome: `${nomeLoc(mapaMun)} (${ufLoc(mapaMun)})`, em: `em ${nomeLoc(mapaMun)}`};
+  if (mapaUF) return {nivel: "uf", keys: ks.filter(k => ufLoc(k) === mapaUF), nome: UF_NOME[mapaUF], em: `em ${UF_NOME[mapaUF]}`};
+  if (mapaReg) return {nivel: "reg", keys: ks.filter(k => REG[mapaReg].includes(ufLoc(k))), nome: "região " + mapaReg, em: `na região ${mapaReg}`};
+  return {nivel: "br", keys: ks, nome: "Brasil", em: "no Brasil"};
+}
+function agrega(keys){
+  const A = Array(8).fill(0), B = Array(7).fill(0), dg = {}; let ap = 0, comp = 0, iw = 0, j = 0, s60 = 0, nb = 0;
+  keys.forEach(k => { const r = LOC[k]; if (!r) return;
+    if (r.a) r.a.forEach((x, i) => A[i] += x);
+    if (r.p){ ap += r.p[0]; comp += r.p[1]; iw += r.p[2] * r.p[1]; j += r.p[3]; s60 += r.p[4]; }
+    if (r.b){ r.b.forEach((x, i) => B[i] += x); nb++; }
+    if (r.d) r.d.forEach(([d, q]) => dg[d] = (dg[d] || 0) + q); });
+  return {A, B: nb ? B : null, n: keys.length, dg, P: {aptos: ap, comp, idade: comp ? iw / comp : null, j, s60}};
+}
+function renderEscopo(){
+  if (!Object.keys(LOC).length){ $("scope").hidden = true; return; }
+  const E = escopo(), temGeo = typeof GEO_MUN !== "undefined";
+  $("sel-reg").innerHTML = '<option value="">Brasil inteiro</option>' + Object.keys(REG).map(r => `<option${r === mapaReg ? " selected" : ""}>${r}</option>`).join("");
+  $("sel-reg").onchange = e => setMapa({reg: e.target.value});
+  $("sel-uf").innerHTML = '<option value="">Todos</option>' + UFS.map(u => `<option value="${u}"${u === mapaUF ? " selected" : ""}>${u} · ${UF_NOME[u]}</option>`).join("");
+  $("sel-uf").onchange = e => setMapa({uf: e.target.value});
+  $("in-mun").parentNode.hidden = !temGeo;
+  if (temGeo){
+    if (!munIdx){ munIdx = new Map(); Object.entries(GEO_MUN.n).forEach(([k, [nm, u]]) => munIdx.set(`${nm} (${u})`.toLowerCase(), k));
+      $("dl-mun").innerHTML = Object.values(GEO_MUN.n).map(([nm, u]) => `${nm} (${u})`).sort((a, b) => a.localeCompare(b, "pt-BR")).map(t => `<option value="${t}">`).join(""); }
+    $("in-mun").onchange = e => { const v = e.target.value.trim(); if (!v) return setMapa({mun: null}); const k = munIdx.get(v.toLowerCase()); if (k) setMapa({vista: "mun", uf: ufLoc(k), mun: k}); };
+    $("in-mun").value = E.nivel === "mun" ? E.nome : "";
+  }
+  $("sc-now").innerHTML = `<b>${E.nome}</b> · ${E.nivel === "br" ? "país inteiro" : E.nivel === "mun" ? "um município" : fmt(E.keys.length) + " municípios"}`;
+  $("btn-reset").hidden = E.nivel === "br"; $("btn-reset").onclick = () => setMapa({reset: 1});
+  ["prorrogacao", "nulos", "vias", "juventude"].forEach(id => {
+    const sec = $(id); if (!sec) return; let a = sec.querySelector(".aviso");
+    if (!a){ a = document.createElement("p"); a.className = "aviso"; sec.querySelector("h2").after(a); }
+    a.hidden = E.nivel === "br";
+    a.innerHTML = `Os gráficos desta seção usam o país inteiro. Para <b>${E.nome}</b>, veja “Quem votou em quem”, logo acima do mapa.`;
+  });
+}
+function renderLocal(){
+  const sec = $("local");
+  if (!Object.keys(LOC).length){ sec.hidden = true; return; }
+  const E = escopo(), S = agrega(E.keys); if (!brAgg) brAgg = agrega(Object.keys(LOC));
+  const BR = brAgg, br = E.nivel === "br", A = S.A, a0 = A[0];
+  $("h-local").textContent = br ? "Quem votou em quem" : "Quem votou em quem: " + E.nome;
+  $("sub-local").textContent = `${br ? "Brasil inteiro, com o exterior" : E.nome}${E.nivel === "mun" ? "" : " · " + fmt(S.n) + " municípios"}. 1º turno: votos válidos (só candidatos). 2º turno: ${S.B ? (S.nb < S.n ? "só as UFs com coleta concluída" : "todas as seções") : "aguardando a coleta deste local"}. Use a barra no topo para mudar o recorte.`;
+  if (!a0){ empty($("kpi-local"), "Sem dados para este recorte."); ["c-l1", "c-l2", "c-ln", "c-lt", "i-l1", "i-l2"].forEach(i => $(i).innerHTML = ""); $("card-lt").hidden = true; return; }
+  const pc = x => 100 * x / a0, th = A => A[3] + A[4] + A[5] + A[6] + A[7];
+  const vs = (v, r, u = "pp") => br ? "" : `${sgn(v - r)} ${u} em relação ao país`;
+  const cmp = S.P.aptos ? 100 * S.P.comp / S.P.aptos : 0, cmpBR = 100 * BR.P.comp / BR.P.aptos;
+  let k = kpi("s3", fmt(S.P.aptos), "eleitores aptos", E.nivel === "mun" ? "" : `${fmt(S.n)} municípios`) +
+    kpi("s3", pct(cmp, 1), "compareceram no 1º turno", vs(cmp, cmpBR)) +
+    kpi("s3", S.P.idade ? dec1(S.P.idade) + " anos" : "–", "idade média de quem compareceu", S.P.idade ? vs(S.P.idade, BR.P.idade, "ano") : "") +
+    kpi("s3", pct(100 * th(A) / a0, 1), "dos votos válidos em terceiras vias", vs(100 * th(A) / a0, 100 * th(BR.A) / BR.A[0]));
+  const B = S.B, t2 = B ? B[0] + B[1] : 0;
+  if (B && t2){
+    const tot2 = t2 + B[2] + B[3], l2 = 100 * B[0] / t2, l2BR = 100 * BR.B[0] / (BR.B[0] + BR.B[1]);
+    k += kpi("s3", pct(l2, 1), "Lula entre Lula e Flávio, 2º turno", vs(l2, l2BR)) +
+      kpi("s3", pct(100 * B[3] / tot2, 2), "votos nulos para presidente", `${fmt(B[3])} votos` + (br ? "" : " · " + vs(100 * B[3] / tot2, 100 * BR.B[3] / (BR.B[0] + BR.B[1] + BR.B[2] + BR.B[3])))) +
+      kpi("s3", pct(100 * B[2] / tot2, 2), "votos em branco para presidente", `${fmt(B[2])} votos`) +
+      kpi("s3", fmt(B[6]), "seções prorrogadas até perto das 19h", `de ${fmt(B[5])} seções (${pct(100 * B[6] / Math.max(1, B[5]), 1)})`);
+  }
+  $("kpi-local").innerHTML = k;
+  // 1º turno
+  const C1 = [["Lula", 1, "var(--s1)"], ["Flávio", 2, "var(--s2)"], ["Cury (Avante)", 3, "var(--s3)"], ["Renan Santos (Missão)", 4, "var(--c5)"], ["Caiado (PSD)", 5, "var(--s4)"], ["Zema (Novo)", 6, "var(--c6)"], ["Demais candidatos", 7, "var(--gray)"]];
+  const top = [...C1].sort((a, b) => A[b[1]] - A[a[1]]);
+  ins("i-l1", `${top[0][0]} foi o mais votado ${E.em}, com ${pct(pc(A[top[0][1]]), 1)} dos votos válidos${top[1] ? `; depois ${top[1][0]}, com ${pct(pc(A[top[1][1]]), 1)}` : ""}.`);
+  hbars($("c-l1"), C1.map(([n, i, c]) => ({label: n, value: pc(A[i]), color: c, txt: `${dec1(pc(A[i]))}% · ${fmt(A[i])}`,
+    tip: `<b>${n}</b><br>${fmt(A[i])} votos válidos (${dec1(pc(A[i]), 2)}%)` + (br ? "" : `<br>país: ${dec1(100 * BR.A[i] / BR.A[0], 2)}%`)})), {R: 150});
+  $("c-l1").insertAdjacentHTML("beforeend", table(["Candidato", "Votos", "% válidos", ...(br ? [] : ["País"])], C1.map(([n, i]) => [n, fmt(A[i]), pct(pc(A[i]), 2), ...(br ? [] : [pct(100 * BR.A[i] / BR.A[0], 2)])])));
+  // 2º turno
+  if (B && t2){
+    const pl = 100 * B[0] / t2, l1 = 100 * A[1] / Math.max(1, A[1] + A[2]);
+    ins("i-l2", `Lula ${pl > 50 ? "venceu" : "perdeu"} o 2º turno ${E.em} com ${pct(pl, 1)} dos votos entre os dois, ${sgn(pl - l1)} pp em relação ao 1º turno (${pct(l1, 1)}).`);
+    $("c-l2").innerHTML = `<div class="duel"><div style="width:${pl}%;background:var(--s1)"><span class="n">${dec1(pl)}%</span>Lula</div><div style="width:${100 - pl}%;background:var(--s2)"><span class="n">${dec1(100 - pl)}%</span>Flávio</div></div>` +
+      `<p class="d" style="margin-top:10px">${fmt(B[0])} × ${fmt(B[1])} votos · brancos ${fmt(B[2])} · nulos ${fmt(B[3])} · compareceram ${fmt(B[4])}</p>`;
+    // nulos
+    let dig = br && D.nulos_digitos ? D.nulos_digitos.pres.slice(0, 6).map(r => [r.digitos, r.qtd]) : Object.entries(S.dg).sort((a, b) => b[1] - a[1]).slice(0, 6);
+    if (dig.length) $("c-ln").innerHTML = `<h4>O que foi digitado nos ${fmt(B[3])} votos nulos</h4><div id="c-ln-b"></div>` + (br || E.nivel === "mun" ? "" : '<p class="d">Soma dos 4 números mais digitados de cada município: aproximado.</p>');
+    else $("c-ln").innerHTML = "";
+    if (dig.length) hbars($("c-ln-b"), dig.map(([d, q]) => ({label: d + (D.elim && D.elim[d] ? " · " + D.elim[d].split(" ")[0] : ""), value: q, color: "var(--b)", txt: `${fmt(q)} · ${pct(100 * q / Math.max(1, B[3]), 1)}`, tip: `Digitado "${d}": ${fmt(q)} votos nulos`})), {R: 120, h: 24});
+  } else {
+    ins("i-l2", ""); empty($("c-l2"), `O 2º turno ${E.em} ainda não foi coletado.`); $("c-ln").innerHTML = "";
+  }
+  // tabela do que está dentro do recorte
+  let rows = [];
+  if (br || E.nivel === "reg"){ const by = {}; E.keys.forEach(x => (by[ufLoc(x)] = by[ufLoc(x)] || []).push(x));
+    rows = Object.entries(by).map(([u, ks]) => ({nome: nomeUF(u), S: agrega(ks), uf: u === "ZZ" ? null : u})); $("t-lt").textContent = "Comparar os estados"; }
+  else if (E.nivel === "uf"){ rows = E.keys.map(x => ({nome: nomeLoc(x), S: agrega([x]), mun: x})); $("t-lt").textContent = `Maiores municípios de ${E.nome}`; }
+  $("card-lt").hidden = E.nivel === "mun";
+  if (E.nivel !== "mun"){
+    rows.sort((a, b) => b.S.A[0] - a.S.A[0]); rows = rows.slice(0, 40);
+    const f = (x, t) => t ? pct(100 * x / t, 1) : "–";
+    $("c-lt").innerHTML = '<div class="scroll"><table><thead><tr><th>Local</th><th>Votos válidos</th><th>Lula 1º</th><th>Flávio 1º</th><th>3ªs vias</th><th>Lula 2º*</th><th>Nulos 2º</th></tr></thead><tbody>' +
+      rows.map(r => { const a = r.S.A, b = r.S.B; return `<tr${r.uf ? ` data-uf="${r.uf}"` : ""}${r.mun ? ` data-mun="${r.mun}"` : ""}><td class="nm">${r.nome}</td><td>${fmt(a[0])}</td><td>${f(a[1], a[0])}</td><td>${f(a[2], a[0])}</td><td>${f(th(a), a[0])}</td><td>${b ? f(b[0], b[0] + b[1]) : "–"}</td><td>${b ? f(b[3], b[0] + b[1] + b[2] + b[3]) : "–"}</td></tr>`; }).join("") +
+      '</tbody></table></div><p class="d" style="margin-top:6px">* Lula entre Lula e Flávio. 1º turno e 3ªs vias: % dos votos válidos.</p>';
+    $("c-lt").querySelectorAll("tr[data-uf]").forEach(tr => tr.onclick = () => { setMapa({uf: tr.dataset.uf}); $("local").scrollIntoView(); });
+    $("c-lt").querySelectorAll("tr[data-mun]").forEach(tr => tr.onclick = () => { setMapa({uf: mapaUF, mun: tr.dataset.mun}); $("local").scrollIntoView(); });
+  }
+}
+function renderMapa(){
+  const MAPA = D.mapa || {};
+  const MET = [
+    {id: "lula_t2", grupo: "Resultado", curto: "2º turno · Lula", nome: "2º turno: Lula entre Lula e Flávio", kind: "div", mid: 50, fmtv: v => pct(v, 1), nota: "só UFs concluídas", esq: "mais Flávio", dir: "mais Lula", cor: "var(--s1)"},
+    {id: "lula_t1", grupo: "Resultado", curto: "1º turno · Lula", nome: "1º turno: Lula entre Lula e Flávio", kind: "div", mid: 50, fmtv: v => pct(v, 1), nota: "país inteiro", esq: "mais Flávio", dir: "mais Lula", cor: "var(--s1)"},
+    {id: "terceiras", grupo: "Terceiras vias", curto: "Somadas", nome: "1º turno: terceiras vias somadas", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos", cor: "var(--y)", fg: "#14201f", escuro: true},
+    {id: "renan", grupo: "Terceiras vias", curto: "Renan Santos", cor: "var(--c5)", nome: "1º turno: Renan Santos", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
+    {id: "cury", grupo: "Terceiras vias", curto: "Cury", cor: "var(--s3)", nome: "1º turno: Cury", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
+    {id: "caiado", grupo: "Terceiras vias", curto: "Caiado", cor: "var(--s4)", fg: "#14201f", nome: "1º turno: Caiado", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
+    {id: "zema", grupo: "Terceiras vias", curto: "Zema", cor: "var(--c6)", nome: "1º turno: Zema", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
+    {id: "idade", grupo: "Eleitorado", curto: "Idade média", nome: "Idade média do eleitorado", kind: "seq", fmtv: v => dec1(v) + " anos", nota: "1º turno, quem compareceu", cor: "var(--b)"},
+    {id: "nulos", grupo: "2º turno", curto: "Votos nulos", nome: "2º turno: votos nulos para presidente", kind: "seq", fmtv: v => pct(v, 2), nota: "só UFs concluídas", cor: "var(--b)"},
+    {id: "prorrogadas", grupo: "2º turno", curto: "Seções prorrogadas", nome: "2º turno: seções prorrogadas", kind: "seq", fmtv: v => pct(v, 2), nota: "1h45 ou mais depois do prazo; só UFs concluídas", cor: "var(--r)"}
+  ].map(m => ({cor: "var(--op)", ...m})).filter(m => MAPA[m.id] && Object.keys(MAPA[m.id]).length);
+  if (!MET.length) return;
+  if (!MET.find(m => m.id === mapaSel)) mapaSel = (MET.find(m => m.id === "terceiras") || MET[0]).id;
+  const m = MET.find(x => x.id === mapaSel), vals = MAPA[m.id];
+  const temGeo = typeof GEO_UF !== "undefined" && typeof GEO_MUN !== "undefined", MM = typeof DADOS_MUN !== "undefined" ? DADOS_MUN : {};
+  const vistas = [["mun", "Municípios"], ["uf", "Estados"], ["tile", "Quadrados"]].filter(v => temGeo || v[0] === "tile");
+  if (!vistas.find(v => v[0] === mapaVista)) mapaVista = vistas[0][0];
+  const mv = MM[m.id] || {}, munOk = temGeo && mapaVista === "mun" && Object.keys(mv).length > 0;
+  const esc = mapaUF ? [mapaUF] : mapaReg ? REG[mapaReg] : null, emEsc = u => !esc || esc.includes(u);
+  const ufDe = k => (GEO_MUN.n[k] || [])[1], nomeMun = k => (GEO_MUN.n[k] || [k])[0];
+  const escNome = mapaUF ? UF_NOME[mapaUF] : mapaReg;
+
+  // controles
+  const grupos = [...new Set(MET.map(x => x.grupo))];
+  $("chips-mapa").innerHTML = grupos.map(g => `<div class="chipg"><span class="chipl">${g}</span>${MET.filter(x => x.grupo === g).map(x => `<button type="button" class="chip" data-m="${x.id}" aria-pressed="${x.id === mapaSel}" style="--chip:${x.cor};--chipfg:${x.fg || "#fff"}">${x.curto}</button>`).join("")}</div>`).join("");
+  $("chips-mapa").querySelectorAll("button").forEach(b => b.onclick = () => setMapa({m: b.dataset.m}));
+  $("seg-vista").innerHTML = vistas.map(v => `<button type="button" data-v="${v[0]}" aria-pressed="${v[0] === mapaVista}">${v[1]}</button>`).join("");
+  $("seg-vista").querySelectorAll("button").forEach(b => b.onclick = () => setMapa({vista: b.dataset.v}));
+  const dl = m.kind === "div" ? ["10% mais Flávio", "10% mais Lula"] : ["10% menores", "10% maiores"];
+  $("seg-dest").innerHTML = [["todos", "Tudo"], ["bot", dl[0]], ["top", dl[1]]].map(([k, t]) => `<button type="button" data-d="${k}" aria-pressed="${mapaDest === k}">${t}</button>`).join("");
+  $("seg-dest").querySelectorAll("button").forEach(b => b.onclick = () => setMapa({dest: b.dataset.d}));
+  $("ck-esc").checked = mapaEscBR; $("ck-esc").parentNode.hidden = !esc; $("ck-esc").onchange = e => setMapa({esc: e.target.checked});
+
+  // valores do recorte atual
+  const base = munOk ? mv : vals, chave = munOk ? ufDe : (k => k);
+  const sub = Object.fromEntries(Object.entries(base).filter(([k, v]) => v != null && emEsc(chave(k)) && (munOk ? GEO_MUN.p[k] : k !== "ZZ" || mapaVista === "tile")));
+  const ord = Object.entries(sub).sort((a, b) => b[1] - a[1]), pos = new Map(ord.map(([k], i) => [k, i + 1]));
+  const hostM = $("c-mapa"), ficha = $("f-mapa");
+  ficha.hidden = true;
+  if (!ord.length){
+    empty(hostM, esc ? `Ainda sem dados desta medida em ${escNome}: a coleta do estado não terminou.` : "Sem dados.");
+    $("lg-mapa").innerHTML = ""; $("c-rank").innerHTML = ""; $("seg-rank").hidden = true; $("i-mapa").textContent = ""; $("d-rank").textContent = "";
+    $("n-mapa").textContent = m.nota; return;
+  }
+  const xs = ord.map(e => e[1]).reverse(), q = p => xs[Math.min(xs.length - 1, Math.max(0, Math.round(p * (xs.length - 1))))];
+  const q10 = q(.1), q90 = q(.9), dest = v => mapaDest === "todos" || (v != null && (mapaDest === "top" ? v >= q90 : v <= q10));
+  const escala = esc && !mapaEscBR ? sub : base;
+  const sufixo = esc ? ` ${esc.length > 1 || mapaReg ? "na região" : "em"} ${escNome}` : "";
+  const tip = (k, v) => { const nm = munOk ? `${nomeMun(k)} (${ufDe(k)})` : (k === "ZZ" ? "Exterior" : UF_NOME[k] || k); return `<b>${nm}</b><br>${m.nome}: ${v == null ? "sem dado ainda" : m.fmtv(v)}` + (pos.has(k) ? `<br><span style="opacity:.75">${pos.get(k)}º de ${fmt(ord.length)}${esc ? sufixo : (munOk ? " municípios" : " no país")}</span>` : ""); };
+  let lim;
+  if (munOk) lim = choropleth(hostM, GEO_UF, GEO_MUN.p, mv, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor, borda: .3, quantil: true, contorno: GEO_UF.p, escala, tip});
+  else if (mapaVista === "tile") lim = tilemap(hostM, vals, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor, escala, tip, ativo: k => emEsc(k) && dest(vals[k]), onsel: k => setMapa({uf: k === mapaUF ? "" : k})});
+  else lim = choropleth(hostM, GEO_UF, GEO_UF.p, vals, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor, rotulos: Object.fromEntries(Object.entries(GEO_UF.c).filter(([k]) => k !== "DF")), borda: 1.4, escala, tip});
+  const svg = hostM.querySelector("svg");
+  if (mapaVista !== "tile" && svg){
+    svg.querySelectorAll("path[data-k]").forEach(p => { const k = p.dataset.k, v = base[k]; p.classList.toggle("off", !(emEsc(chave(k)) && dest(v))); if (munOk && k === mapaMun) p.classList.add("sel"); });
+    if (esc){ esc.forEach(u => GEO_UF.p[u] && el("path", {d: GEO_UF.p[u], class: "selUF"}, svg)); zoomUF(svg, esc); }
+    svg.addEventListener("click", e => { const k = e.target.dataset && e.target.dataset.k; if (!k) return; if (munOk) setMapa({mun: k === mapaMun ? null : k}); else setMapa({uf: k === mapaUF ? "" : k}); });
+  }
+
+  // legenda e textos
+  const {lo, hi} = lim, qn = munOk ? " (percentis 5 a 95)" : "";
+  $("lg-mapa").innerHTML = m.kind === "div"
+    ? `<span>${m.esq}</span><span class="grad" style="background:linear-gradient(90deg,var(--s2),var(--surface) 50%,var(--s1))"></span><span>${m.dir}</span><span style="margin-left:auto">${m.fmtv(lo)} a ${m.fmtv(hi)}${qn}</span>`
+    : `<span>${m.fmtv(lo)}</span><span class="grad" style="background:linear-gradient(90deg,color-mix(in srgb,${m.cor} 14%,var(--surface)),${m.cor})"></span><span>${m.fmtv(hi)}${qn}</span>`;
+  const nTot = munOk ? 5570 : 27;
+  $("n-mapa").textContent = `${m.nota}${esc ? " · " + escNome : ""} · ${fmt(ord.length)}${munOk && !esc ? " de 5.570" : ""} ${munOk ? "municípios" : "UFs"}${mapaDest !== "todos" ? ` · destacando ${fmt(ord.filter(([, v]) => dest(v)).length)}` : ""}${esc && !mapaEscBR ? " · escala da seleção" : ""}`;
+  const nm = k => munOk ? nomeMun(k) : k, mx = ord[0], mn = ord[ord.length - 1];
+  if (m.kind === "div") ins("i-mapa", `${m.dir.replace("mais ", "")} à frente em ${fmt(ord.filter(([, v]) => v > m.mid).length)} de ${fmt(ord.length)} ${munOk ? "municípios" : "UFs"}${sufixo}; maior vantagem: ${nm(mx[0])} (${m.fmtv(mx[1])}), menor: ${nm(mn[0])} (${m.fmtv(mn[1])}).`);
+  else ins("i-mapa", `Maior${sufixo}: ${nm(mx[0])} (${m.fmtv(mx[1])}) · menor: ${nm(mn[0])} (${m.fmtv(mn[1])}).`);
+
+  // detalhe do município clicado
+  if (munOk && mapaMun){
+    const k = mapaMun, u = ufDe(k), v = mv[k], doUF = Object.entries(mv).filter(([c, x]) => x != null && ufDe(c) === u).sort((a, b) => b[1] - a[1]), todos = Object.entries(mv).filter(([c, x]) => x != null && GEO_MUN.p[c]).map(e => e[1]);
+    const med = a => a.reduce((s, x) => s + x, 0) / a.length, iUF = doUF.findIndex(e => e[0] === k), iBR = todos.filter(x => x > (v == null ? 1e9 : v)).length;
+    ficha.hidden = false;
+    ficha.innerHTML = `<button type="button" class="x" aria-label="Fechar detalhe">×</button><div class="fh">${nomeMun(k)} (${u})</div>` + (v == null ? `<ul><li>Sem dado desta medida para o município.</li></ul>` :
+      `<div class="fv">${m.fmtv(v)}</div><ul><li>${fmt(iBR + 1)}º de ${fmt(todos.length)} municípios do país</li><li>${fmt(iUF + 1)}º de ${fmt(doUF.length)} em ${UF_NOME[u]}</li><li>Média simples dos municípios de ${u}: ${m.fmtv(med(doUF.map(e => e[1])))} · do país: ${m.fmtv(med(todos))}</li></ul>`) +
+      (mapaUF === u ? "" : `<button type="button" class="tg" data-uf="${u}">Aproximar em ${UF_NOME[u]}</button>`);
+    ficha.querySelector(".x").onclick = () => setMapa({mun: null});
+    const bt = ficha.querySelector("[data-uf]"); if (bt) bt.onclick = () => setMapa({uf: u, mun: k});
+  }
+
+  // ranking
+  const sr = $("seg-rank"), rankMun = munOk && esc;
+  sr.hidden = !rankMun;
+  const div = m.kind === "div", fv = v => (v >= 0 ? "+" : "−") + dec1(Math.abs(v)) + " pp";
+  if (rankMun){
+    sr.innerHTML = [["max", div ? "Mais " + m.dir.replace("mais ", "") : "Maiores"], ["min", div ? "Mais " + m.esq.replace("mais ", "") : "Menores"]].map(([k, t]) => `<button type="button" data-r="${k}" aria-pressed="${mapaRank === k}">${t}</button>`).join("");
+    sr.querySelectorAll("button").forEach(b => b.onclick = () => setMapa({rank: b.dataset.r}));
+    $("t-rank").textContent = `Municípios${sufixo}`;
+    $("d-rank").textContent = div ? "Diferença para 50% (empate), em pontos percentuais." : m.nome;
+    const lista = (mapaRank === "max" ? ord : [...ord].reverse()).slice(0, 10), rot = k => mapaUF ? nomeMun(k) : `${nomeMun(k)} (${ufDe(k)})`;
+    const it = lista.map(([k, v]) => ({label: rot(k), value: div ? Math.abs(v - m.mid) : v, txt: div ? fv(v - m.mid) : null, color: div ? (v >= m.mid ? "var(--s1)" : "var(--s2)") : m.cor, tip: `${rot(k)}: ${m.fmtv(v)}`, click: () => setMapa({mun: k})}));
+    hbars($("c-rank"), it, {fmtv: m.fmtv, h: 24});
+  } else {
+    $("t-rank").textContent = esc ? `UFs${sufixo}` : "Ranking das UFs";
+    $("d-rank").textContent = div ? "Diferença para 50% (empate), em pontos percentuais." : m.nome;
+    const lista = Object.entries(vals).filter(([u, v]) => v != null && u !== "ZZ" && emEsc(u)).sort((a, b) => b[1] - a[1]);
+    const it = lista.map(([u, v]) => ({label: u, value: div ? Math.abs(v - m.mid) : v, txt: div ? fv(v - m.mid) : null, color: div ? (v >= m.mid ? "var(--s1)" : "var(--s2)") : m.cor, tip: `${UF_NOME[u]}: ${m.fmtv(v)}`, click: () => setMapa({uf: u === mapaUF ? "" : u})}));
+    hbars($("c-rank"), it, {fmtv: m.fmtv, h: 22});
+  }
+  if (mapaTocado){ try { const p = new URLSearchParams(); p.set("mapa", m.id); if (mapaVista !== "mun") p.set("vista", mapaVista); if (mapaReg) p.set("reg", mapaReg); if (mapaUF) p.set("uf", mapaUF); if (mapaMun) p.set("mun", mapaMun); if (mapaDest !== "todos") p.set("dest", mapaDest); if (mapaEscBR) p.set("esc", "br"); history.replaceState(null, "", "?" + p + location.hash); } catch (e) {} }
+}
+
 function render(){
   const C = D.coleta, nUF = C.ufs_concluidas.length, p = C.secoes_total ? 100 * C.secoes_ok / C.secoes_total : 0;
   const completa = nUF >= D.total_ufs;
@@ -516,55 +900,7 @@ function render(){
     return `<div class="uf ${u.estado}" title="${u.uf}: ${fmt(u.ok)} de ${fmt(u.total)} seções"><div class="h"><b>${u.uf}</b><span>${st}</span></div><div class="bar"><i style="width:${q}%"></i></div><small>${u.estado === "fila" ? fmt(u.total) + " seções" : u.estado === "concluida" ? fmt(u.ok) + " seções" : fmt(u.ok) + " / " + fmt(u.total)}</small></div>`;
   }).join("");
 
-  // mapa por UF
-  const MAPA = D.mapa || {};
-  const MET = [
-    {id: "lula_t2", nome: "2º turno: Lula entre Lula e Flávio", kind: "div", mid: 50, fmtv: v => pct(v, 1), nota: "só UFs concluídas", esq: "mais Flávio", dir: "mais Lula"},
-    {id: "lula_t1", nome: "1º turno: Lula entre Lula e Flávio", kind: "div", mid: 50, fmtv: v => pct(v, 1), nota: "país inteiro", esq: "mais Flávio", dir: "mais Lula"},
-    {id: "terceiras", nome: "1º turno: terceiras vias somadas", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
-    {id: "renan", cor: "var(--c5)", nome: "1º turno: Renan Santos", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
-    {id: "cury", cor: "var(--s3)", nome: "1º turno: Cury", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
-    {id: "caiado", cor: "var(--s4)", nome: "1º turno: Caiado", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
-    {id: "zema", cor: "var(--c6)", nome: "1º turno: Zema", kind: "seq", fmtv: v => pct(v, 1), nota: "% dos votos válidos"},
-    {id: "idade", nome: "Idade média do eleitorado", kind: "seq", fmtv: v => dec1(v) + " anos", nota: "1º turno, quem compareceu"},
-    {id: "nulos", nome: "2º turno: votos nulos para presidente", kind: "seq", fmtv: v => pct(v, 2), nota: "só UFs concluídas"},
-    {id: "prorrogadas", nome: "2º turno: seções prorrogadas", kind: "seq", fmtv: v => pct(v, 2), nota: "1h45 ou mais depois do prazo; só UFs concluídas"}
-  ].map(m => ({cor: "var(--op)", ...m})).filter(m => MAPA[m.id] && Object.keys(MAPA[m.id]).length);
-  if (MET.length){
-    if (!MET.find(m => m.id === mapaSel)) mapaSel = (MET.find(m => m.id === "terceiras") || MET[0]).id;
-    const sel = $("sel-mapa");
-    sel.innerHTML = MET.map(m => `<option value="${m.id}"${m.id === mapaSel ? " selected" : ""}>${m.nome}</option>`).join("");
-    sel.onchange = () => { mapaSel = sel.value; render(); };
-    const m = MET.find(x => x.id === mapaSel), vals = MAPA[m.id];
-    $("n-mapa").textContent = m.nota + (Object.keys(vals).filter(k => k !== "ZZ").length < 27 ? ` · ${Object.keys(vals).filter(k => k !== "ZZ").length} de 27 UFs` : "");
-    const temGeo = typeof GEO_UF !== "undefined" && typeof GEO_MUN !== "undefined", MM = typeof DADOS_MUN !== "undefined" ? DADOS_MUN : {};
-    const vistas = [["mun", "Municípios"], ["uf", "Estados"], ["tile", "Quadrados"]].filter(v => temGeo || v[0] === "tile");
-    if (!vistas.find(v => v[0] === mapaVista)) mapaVista = vistas[0][0];
-    $("seg-vista").innerHTML = vistas.map(v => `<button type="button" data-v="${v[0]}" aria-pressed="${v[0] === mapaVista}">${v[1]}</button>`).join("");
-    $("seg-vista").querySelectorAll("button").forEach(b => b.onclick = () => { mapaVista = b.dataset.v; render(); });
-    const mv = MM[m.id] || {};
-    let lim;
-    if (mapaVista === "mun" && Object.keys(mv).length){
-      lim = choropleth($("c-mapa"), GEO_UF, GEO_MUN.p, mv, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor, nomes: GEO_MUN.n, borda: .3, quantil: true, contorno: GEO_UF.p});
-      $("n-mapa").textContent = `${m.nota} · ${fmt(Object.keys(mv).filter(k => GEO_MUN.p[k]).length)} de 5.570 municípios`;
-    } else if (mapaVista === "uf" || mapaVista === "mun") {
-      lim = choropleth($("c-mapa"), GEO_UF, GEO_UF.p, vals, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor, rotulos: Object.fromEntries(Object.entries(GEO_UF.c).filter(([k]) => k !== "DF")), borda: 1.4});
-    } else {
-      lim = tilemap($("c-mapa"), vals, {kind: m.kind, mid: m.mid, fmtv: m.fmtv, nome: m.nome, cor: m.cor});
-    }
-    const {lo, hi} = lim, quant = mapaVista === "mun" && Object.keys(mv).length > 0, qn = quant ? " (percentis 5 a 95)" : "";
-    $("lg-mapa").innerHTML = m.kind === "div"
-      ? `<span>${m.esq}</span><span class="grad" style="background:linear-gradient(90deg,var(--s2),var(--surface) 50%,var(--s1))"></span><span>${m.dir}</span><span style="margin-left:auto">${m.fmtv(lo)} a ${m.fmtv(hi)}${qn}</span>`
-      : `<span>${m.fmtv(lo)}</span><span class="grad" style="background:linear-gradient(90deg,color-mix(in srgb,${m.cor} 14%,var(--surface)),${m.cor})"></span><span>${m.fmtv(hi)}${qn}</span>`;
-    const lista = Object.entries(vals).filter(([u, v]) => v != null && u !== "ZZ").sort((a, b) => b[1] - a[1]);
-    if (lista.length) ins("i-mapa", m.kind === "div"
-      ? `${m.dir.replace("mais ", "")} à frente em ${lista.filter(([u, v]) => v > m.mid).length} de ${lista.length} UFs; maior vantagem: ${lista[0][0]} (${m.fmtv(lista[0][1])}), menor: ${lista[lista.length - 1][0]} (${m.fmtv(lista[lista.length - 1][1])}).`
-      : `Maior: ${lista[0][0]} (${m.fmtv(lista[0][1])}) · menor: ${lista[lista.length - 1][0]} (${m.fmtv(lista[lista.length - 1][1])}).`);
-    $("t-rank").textContent = "Ranking das UFs";
-    $("d-rank").textContent = m.kind === "div" ? "Diferença para 50% (empate), em pontos percentuais." : m.nome;
-    if (m.kind === "div") divbars($("c-rank"), lista.map(([u, v]) => ({label: u, value: v - m.mid, tip: `${u}: ${m.fmtv(v)}`})), {fmtv: v => (v >= 0 ? "+" : "−") + dec1(Math.abs(v)) + " pp"});
-    else hbars($("c-rank"), lista.map(([u, v]) => ({label: u, value: v, tip: `${u}: ${m.fmtv(v)}`})), {fmtv: m.fmtv, h: 22, color: m.cor});
-  }
+  renderEscopo(); renderLocal(); renderMapa();
 
   // prorrogação
   if (P){
@@ -775,7 +1111,7 @@ function render(){
 }
 render();
 (function(){ const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ document.querySelectorAll("nav a").forEach(a => a.removeAttribute("aria-current")); const a = document.querySelector(`nav a[href="#${en.target.id}"]`); if (a) a.setAttribute("aria-current", "true"); } }), {rootMargin: "-30% 0px -60% 0px"});
-  ["coleta", "mapa", "prorrogacao", "nulos", "vias", "juventude", "metodo"].forEach(id => { const e = document.getElementById(id); if (e) io.observe(e); }); })();
+  ["coleta", "local", "mapa", "prorrogacao", "nulos", "vias", "juventude", "metodo"].forEach(id => { const e = document.getElementById(id); if (e) io.observe(e); }); })();
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(render, 150); });
 </script>
 </body>
